@@ -18,7 +18,7 @@ DistGDM <- function(site.grid, gdm.rast, env.vars, dist="mhtn") {
   if (dist == "bio") {
     res <- rep(gdm.rast$intercept, nrow(site.grid))
     for (i in 1:nlyr(env.vars)) {
-      res <- res + abs(terra::extract(env.vars[[i]], site.grid$Var1) - extract(env.vars[[i]], site.grid$Var2))
+      res <- res + abs(terra::extract(env.vars[[i]], site.grid$Var1) - terra::extract(env.vars[[i]], site.grid$Var2))
     }
     res <- 1 - 1 / (exp(res))
   }
@@ -26,7 +26,7 @@ DistGDM <- function(site.grid, gdm.rast, env.vars, dist="mhtn") {
   if (dist == "mhtn") {
     res <- rep(0, nrow(site.grid))
     for (i in 1:nlyr(env.vars)) {
-      res <- res + abs(terra::extract(env.vars[[i]], site.grid$Var1) - extract(env.vars[[i]], site.grid$Var2))
+      res <- res + abs(terra::extract(env.vars[[i]], site.grid$Var1) - terra::extract(env.vars[[i]], site.grid$Var2))
     }
   }
   
